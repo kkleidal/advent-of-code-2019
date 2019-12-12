@@ -52,19 +52,42 @@ class Process:
     def step(self):
         return self.state.step(self)
 
+    def waiting_for_input(self):
+        return isinstance(self.state, ProcessStateWaitingForInput)
+
+    def waiting_for_output(self):
+        return isinstance(self.state, ProcessStateSendingOutput)
+
+    def send(self, input):
+        self.step_until_interrupt()
+        self.set_input(input)
+
+    def recv(self):
+        self.step_until_interrupt()
+        return self.get_output()
+
+    def step_until_interrupt(self):
+        while True:
+            if self.waiting_for_input():
+                return
+            elif self.waiting_for_output():
+                return
+            else:
+                self.step()
+
     def run(self, inputs=None):
         try:
             if inputs is None:
                 inputs = default_get_input()
             inputs = iter(inputs)
             while True:
-                if isinstance(self.state, ProcessStateWaitingForInput):
+                if self.waiting_for_input():
                     try:
                         input_value = next(inputs)
                     except StopIteration:
                         raise EarlyEndOfInputError
                     self.set_input(input_value)
-                elif isinstance(self.state, ProcessStateSendingOutput):
+                elif self.waiting_for_output():
                     yield self.get_output()
                 else:
                     self.step()
