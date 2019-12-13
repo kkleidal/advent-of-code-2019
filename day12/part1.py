@@ -2,58 +2,6 @@ import re
 import numpy as np
 import itertools
 
-class GravityStrategy:
-    def compute(self, pos):
-        raise NotImplementedError
-
-class DefaultGravityStrategy:
-    def compute(self, pos):
-        N, D = pos.shape
-        return np.sum(-np.sign(
-            np.reshape(pos, [N, 1, D]) - np.reshape(pos, [1, N, D])), axis=1)
-
-class ExperimentalGravityStrategy:
-    def compute(self, pos):
-        N, D = pos.shape
-        gravity = np.zeros([N, D], dtype=np.int32)
-        for dim in range(D):
-            arr = pos[:,dim]
-            order = np.argsort(arr)
-            values = arr[order]
-
-            lesser = 0
-            equal = 0
-            current = None
-            for i in range(N):
-                idx = order[i]
-                if current is None:
-                    current = values[i]
-                    equal += 1
-                elif current == values[i]:
-                    equal += 1
-                elif current != values[i]:
-                    lesser += equal
-                    equal = 1
-                    current = values[i]
-                gravity[idx, dim] -= lesser
-
-            greater = 0
-            equal = 0
-            current = None
-            for i in range(N-1, -1, -1):
-                idx = order[i]
-                if current is None:
-                    current = values[i]
-                    equal += 1
-                elif current == values[i]:
-                    equal += 1
-                elif current != values[i]:
-                    greater += equal
-                    equal = 1
-                    current = values[i]
-                gravity[idx, dim] += greater
-        return gravity
-
 class Simulation:
     _base_vec = r"<x=\s*(-?\d+),\s*y=\s*(-?\d+),\s*z=\s*(-?\d+)>"
     _pattern = re.compile("^" + _base_vec + "$")
@@ -67,12 +15,7 @@ class Simulation:
 
     def step(self):
         N, D = self.pos.shape
-        
-        #gravity1 = ExperimentalGravityStrategy().compute(self.pos)
-        gravity2 = DefaultGravityStrategy().compute(self.pos)
-        #assert np.all(gravity1 == gravity2)
-
-        gravity = gravity2
+        gravity = np.sum(-np.sign(np.reshape(self.pos, [N, 1, D]) - np.reshape(self.pos, [1, N, D])), axis=1)
         self.vel += gravity
         self.pos += self.vel
         self.t += 1
