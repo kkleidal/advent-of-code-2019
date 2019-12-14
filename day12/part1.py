@@ -9,8 +9,8 @@ class Simulation:
     _state = re.compile("^pos=" + _base_vec + ", vel=" + _base_vec + "$")
 
     def __init__(self, pos, vel):
-        self.pos = pos
-        self.vel = vel
+        self.pos = pos.copy()
+        self.vel = vel.copy()
         self.t = 0
 
     def step(self):
@@ -96,6 +96,16 @@ def make_test_case(input_file, output_file, energy_file):
 test_1 = make_test_case("test1.in", "test1.out", "test1.energy")
 test_2 = make_test_case("test2.in", "test2.out", "test2.energy")
 
+def test_3():
+    simulation = Simulation.parse('''
+        <x=-1, y=7, z=3>
+        <x=12, y=2, z=-13>
+        <x=14, y=18, z=-8>
+        <x=17, y=4, z=-4>''')
+    for _ in range(1000):
+        simulation.step()
+    assert simulation.energy() == 7077
+
 if __name__ == "__main__":
     simulation = Simulation.parse('''
         <x=-1, y=7, z=3>
@@ -105,4 +115,3 @@ if __name__ == "__main__":
     for _ in range(1000):
         simulation.step()
     print(simulation.energy())
-
