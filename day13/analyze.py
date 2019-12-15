@@ -177,7 +177,7 @@ print(branches)
 def add_comment(memory, comment):
     cfg[memory].add_comment(comment)
 
-add_comment(578, "function(y, x) -> memory[693 + y * 40 + x]")
+add_comment(578, "function(y, x) -> memory[639 + y * 40 + x]")
 add_comment(578, "this is like moving the stack pointer")
 add_comment(580, "y (arg[0]) * 40 -> cell (@593)")
 add_comment(584, "x (arg[1]) + cell -> cell (@593)")

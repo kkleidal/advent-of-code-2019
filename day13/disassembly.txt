@@ -34,7 +34,7 @@ branch22:
    34: JmpIfTrueOp [1 578]
 
 branch578:
-     # Comment: function(y, x) -> memory[693 + y * 40 + x]
+     # Comment: function(y, x) -> memory[639 + y * 40 + x]
      # Comment: this is like moving the stack pointer
      # Jumps from {225, 34, 177, 276}, jumps to {580}
    578: AdjustRelativeBaseOp [3]
