@@ -1,10 +1,13 @@
-I reverse engineered the solution for problem2.
+I reverse engineered the solution for part 2.
 
-Things I tried before getting it working:
+## Things I tried before getting it working
+
 1. Whenever I "lost" I put the ball back in the top of the board and continued executing. This ended up messing up the score.
 2. I started trying to make an RL agent to play the game using deep-Q learning, but abandoned that pretty quickly when I thought up the solution that worked.
 
-The solution that worked: I wrote a basic disassembler for intcode to make it easier for me to read
+## The solution that worked
+
+I wrote a basic disassembler for intcode to make it easier for me to read
 the intcode and identify where I needed to make my changes.
 
 Using the disassembler (see [disassembly.txt](./disassembly.txt)), I realized that the initial
