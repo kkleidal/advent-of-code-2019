@@ -14,3 +14,5 @@ Using the disassembler (see [disassembly.txt](./disassembly.txt)), I realized th
 board state was being stored by tile codes at memory addresses 639 + 40 * y + x where y was
 the y coordinate of the tile and x the x coordinate. So in `hacked_game_factory`, I simply
 wrote a row of walls at `y = 24` so that the ball couldn't fall out the bottom.
+
+![](./part2.png)
