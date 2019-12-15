@@ -1,0 +1,477 @@
+[0, 18, 22, 578, 37, 54, 65, 75, 84, 91, 161, 180, 213, 228, 261, 264, 279, 316, 319, 549, 338, 365, 231, 253, 282, 289, 393, 414, 481, 492, 503, 507, 518, 529, 540, 304, 94, 119, 138, 238, 108, 183, 205, 372, 378]
+branch0:
+     # Comment: Quarter logic. Probably add -> multiply when you 'add quarters'
+     # Jumps from set(), jumps to {4}
+   0: MultiplyOp [@380 @379 @385]
+     # Jumps from {0}, jumps to {8}
+   4: EqualsOp [@2639 310356 @381]
+     # Jumps from {4}, jumps to {12}
+   8: JmpIfTrueOp [@381 12]
+     # Comment: Stack base @2640
+     # Jumps from {8}, jumps to {14}
+   12: AdjustRelativeBaseOp [2640]
+     # Comment: Set y = 0
+     # Jumps from {12}, jumps to {18}
+   14: AddOp [0 0 @383]
+
+branch18:
+     # Comment: Set x = 0
+     # Jumps from {62, 14}, jumps to {22}
+   18: AddOp [0 0 @382]
+
+branch22:
+     # Comment: Set x -> arg[1] of future call
+     # Jumps from {18, 51}, jumps to {26}
+   22: MultiplyOp [1 @382 @(base+1)]
+     # Comment: Set y -> arg[0] of future call
+     # Jumps from {22}, jumps to {30}
+   26: MultiplyOp [@383 1 @(base+2)]
+     # Comment: Set return pointer for future call
+     # Jumps from {26}, jumps to {34}
+   30: AddOp [0 37 @(base+0)]
+     # Comment: Make call
+     # Jumps from {30}, jumps to {578}
+   34: JmpIfTrueOp [1 578]
+
+branch578:
+     # Comment: function(y, x) -> memory[693 + y * 40 + x]
+     # Comment: this is like moving the stack pointer
+     # Jumps from {225, 34, 177, 276}, jumps to {580}
+   578: AdjustRelativeBaseOp [3]
+     # Comment: y (arg[0]) * 40 -> cell (@593)
+     # Jumps from {578}, jumps to {584}
+   580: MultiplyOp [@(base+-1) 40 @593]
+     # Comment: x (arg[1]) + cell -> cell (@593)
+     # Comment: 639 (memory offset) + cell -> cell (@593)
+     # Jumps from {580}, jumps to {588}
+   584: AddOp [@(base+-2) @593 @593]
+     # Jumps from {584}, jumps to {592}
+   588: AddOp [639 @593 @593]
+     # Comment: @cell -> (arg[1])
+     # Jumps from {588}, jumps to {596}
+   592: AddOp [@780 0 @(base+-2)] [@895 0 @(base+-2)] [@1400 0 @(base+-2)] [@1461 0 @(base+-2)] [@1259 0 @(base+-2)] [@678 0 @(base+-2)] [@979 0 @(base+-2)] [@1500 0 @(base+-2)] [@1042 0 @(base+-2)] [@1359 0 @(base+-2)] [@1018 0 @(base+-2)] [@877 0 @(base+-2)] [@1398 0 @(base+-2)] [@1443 0 @(base+-2)] [@1241 0 @(base+-2)] [@1621 0 @(base+-2)] [@660 0 @(base+-2)] [@961 0 @(base+-2)] [@1482 0 @(base+-2)] [@1024 0 @(base+-2)] [@1341 0 @(base+-2)] [@1139 0 @(base+-2)] [@1000 0 @(base+-2)] [@859 0 @(base+-2)] [@1380 0 @(base+-2)] [@1425 0 @(base+-2)] [@1239 0 @(base+-2)] [@1603 0 @(base+-2)] [@642 0 @(base+-2)] [@959 0 @(base+-2)] [@1464 0 @(base+-2)] [@757 0 @(base+-2)] [@1278 0 @(base+-2)] [@1323 0 @(base+-2)] [@1121 0 @(base+-2)] [@998 0 @(base+-2)] [@841 0 @(base+-2)] [@1362 0 @(base+-2)] [@1423 0 @(base+-2)] [@1221 0 @(base+-2)] [@1585 0 @(base+-2)] [@880 0 @(base+-2)] [@941 0 @(base+-2)] [@1462 0 @(base+-2)] [@739 0 @(base+-2)] [@1260 0 @(base+-2)] [@1305 0 @(base+-2)] [@1119 0 @(base+-2)] [@1624 0 @(base+-2)] [@980 0 @(base+-2)] [@839 0 @(base+-2)] [@1344 0 @(base+-2)] [@1203 0 @(base+-2)] [@1583 0 @(base+-2)] [@878 0 @(base+-2)] [@923 0 @(base+-2)] [@1444 0 @(base+-2)] [@721 0 @(base+-2)] [@1242 0 @(base+-2)] [@1303 0 @(base+-2)] [@1101 0 @(base+-2)] [@1622 0 @(base+-2)] [@962 0 @(base+-2)] [@760 0 @(base+-2)] [@821 0 @(base+-2)] [@1342 0 @(base+-2)] [@1140 0 @(base+-2)] [@1185 0 @(base+-2)] [@1565 0 @(base+-2)] [@860 0 @(base+-2)] [@905 0 @(base+-2)] [@1426 0 @(base+-2)] [@719 0 @(base+-2)] [@1224 0 @(base+-2)] [@1285 0 @(base+-2)] [@1083 0 @(base+-2)] [@1604 0 @(base+-2)] [@944 0 @(base+-2)] [@758 0 @(base+-2)] [@803 0 @(base+-2)] [@1324 0 @(base+-2)] [@1122 0 @(base+-2)] [@1183 0 @(base+-2)] [@1547 0 @(base+-2)] [@842 0 @(base+-2)] [@903 0 @(base+-2)] [@1408 0 @(base+-2)] [@701 0 @(base+-2)] [@1222 0 @(base+-2)] [@1523 0 @(base+-2)] [@1065 0 @(base+-2)] [@1586 0 @(base+-2)] [@942 0 @(base+-2)] [@740 0 @(base+-2)] [@785 0 @(base+-2)] [@1306 0 @(base+-2)] [@1104 0 @(base+-2)] [@1165 0 @(base+-2)] [@824 0 @(base+-2)] [@683 0 @(base+-2)] [@1204 0 @(base+-2)] [@1505 0 @(base+-2)] [@1063 0 @(base+-2)] [@1568 0 @(base+-2)] [@924 0 @(base+-2)] [@722 0 @(base+-2)] [@783 0 @(base+-2)] [@1288 0 @(base+-2)] [@1102 0 @(base+-2)] [@1403 0 @(base+-2)] [@822 0 @(base+-2)] [@665 0 @(base+-2)] [@1186 0 @(base+-2)] [@1503 0 @(base+-2)] [@1045 0 @(base+-2)] [@1566 0 @(base+-2)] [@906 0 @(base+-2)] [@704 0 @(base+-2)] [@1021 0 @(base+-2)] [@1286 0 @(base+-2)] [@1084 0 @(base+-2)] [@1385 0 @(base+-2)] [@804 0 @(base+-2)] [@663 0 @(base+-2)] [@1168 0 @(base+-2)] [@1485 0 @(base+-2)] [@1027 0 @(base+-2)] [@1548 0 @(base+-2)] [@702 0 @(base+-2)] [@1003 0 @(base+-2)] [@1524 0 @(base+-2)] [@1066 0 @(base+-2)] [@1383 0 @(base+-2)] [@786 0 @(base+-2)] [@645 0 @(base+-2)] [@1166 0 @(base+-2)] [@1467 0 @(base+-2)] [@1265 0 @(base+-2)] [@684 0 @(base+-2)] [@985 0 @(base+-2)] [@1506 0 @(base+-2)] [@1048 0 @(base+-2)] [@1365 0 @(base+-2)] [@768 0 @(base+-2)] [@883 0 @(base+-2)] [@1404 0 @(base+-2)] [@1449 0 @(base+-2)] [@1263 0 @(base+-2)] [@1627 0 @(base+-2)] [@666 0 @(base+-2)] [@983 0 @(base+-2)] [@1488 0 @(base+-2)] [@1046 0 @(base+-2)] [@1347 0 @(base+-2)] [@1145 0 @(base+-2)] [@1022 0 @(base+-2)] [@865 0 @(base+-2)] [@1386 0 @(base+-2)] [@1447 0 @(base+-2)] [@1245 0 @(base+-2)] [@1609 0 @(base+-2)] [@648 0 @(base+-2)] [@965 0 @(base+-2)] [@1486 0 @(base+-2)] [@763 0 @(base+-2)] [@1028 0 @(base+-2)] [@1329 0 @(base+-2)] [@1143 0 @(base+-2)] [@1004 0 @(base+-2)] [@863 0 @(base+-2)] [@1368 0 @(base+-2)] [@1429 0 @(base+-2)] [@1227 0 @(base+-2)] [@1607 0 @(base+-2)] [@646 0 @(base+-2)] [@947 0 @(base+-2)] [@1468 0 @(base+-2)] [@745 0 @(base+-2)] [@1266 0 @(base+-2)] [@1327 0 @(base+-2)] [@1125 0 @(base+-2)] [@986 0 @(base+-2)] [@845 0 @(base+-2)] [@1366 0 @(base+-2)] [@1411 0 @(base+-2)] [@1209 0 @(base+-2)] [@1589 0 @(base+-2)] [@884 0 @(base+-2)] [@929 0 @(base+-2)] [@1450 0 @(base+-2)] [@743 0 @(base+-2)] [@1248 0 @(base+-2)] [@1309 0 @(base+-2)] [@1107 0 @(base+-2)] [@1628 0 @(base+-2)] [@968 0 @(base+-2)] [@827 0 @(base+-2)] [@1348 0 @(base+-2)] [@1146 0 @(base+-2)] [@1207 0 @(base+-2)] [@1571 0 @(base+-2)] [@866 0 @(base+-2)] [@927 0 @(base+-2)] [@1432 0 @(base+-2)] [@725 0 @(base+-2)] [@1246 0 @(base+-2)] [@1291 0 @(base+-2)] [@1089 0 @(base+-2)] [@1610 0 @(base+-2)] [@966 0 @(base+-2)] [@764 0 @(base+-2)] [@809 0 @(base+-2)] [@1330 0 @(base+-2)] [@1128 0 @(base+-2)] [@1189 0 @(base+-2)] [@1553 0 @(base+-2)] [@848 0 @(base+-2)] [@909 0 @(base+-2)] [@1430 0 @(base+-2)] [@707 0 @(base+-2)] [@1228 0 @(base+-2)] [@1529 0 @(base+-2)] [@1087 0 @(base+-2)] [@1592 0 @(base+-2)] [@948 0 @(base+-2)] [@746 0 @(base+-2)] [@807 0 @(base+-2)] [@1312 0 @(base+-2)] [@1126 0 @(base+-2)] [@1171 0 @(base+-2)] [@1551 0 @(base+-2)] [@846 0 @(base+-2)] [@1412 0 @(base+-2)] [@689 0 @(base+-2)] [@1210 0 @(base+-2)] [@1527 0 @(base+-2)] [@1069 0 @(base+-2)] [@1590 0 @(base+-2)] [@930 0 @(base+-2)] [@728 0 @(base+-2)] [@789 0 @(base+-2)] [@1310 0 @(base+-2)] [@1108 0 @(base+-2)] [@1153 0 @(base+-2)] [@828 0 @(base+-2)] [@687 0 @(base+-2)] [@1192 0 @(base+-2)] [@1509 0 @(base+-2)] [@1051 0 @(base+-2)] [@1572 0 @(base+-2)] [@912 0 @(base+-2)] [@726 0 @(base+-2)] [@771 0 @(base+-2)] [@1292 0 @(base+-2)] [@1090 0 @(base+-2)] [@1407 0 @(base+-2)] [@810 0 @(base+-2)] [@669 0 @(base+-2)] [@1190 0 @(base+-2)] [@1491 0 @(base+-2)] [@1033 0 @(base+-2)] [@1554 0 @(base+-2)] [@910 0 @(base+-2)] [@708 0 @(base+-2)] [@1009 0 @(base+-2)] [@1530 0 @(base+-2)] [@1072 0 @(base+-2)] [@1389 0 @(base+-2)] [@792 0 @(base+-2)] [@651 0 @(base+-2)] [@1172 0 @(base+-2)] [@1473 0 @(base+-2)] [@1031 0 @(base+-2)] [@1536 0 @(base+-2)] [@690 0 @(base+-2)] [@1007 0 @(base+-2)] [@1512 0 @(base+-2)] [@1070 0 @(base+-2)] [@1371 0 @(base+-2)] [@790 0 @(base+-2)] [@889 0 @(base+-2)] [@1154 0 @(base+-2)] [@1471 0 @(base+-2)] [@1269 0 @(base+-2)] [@1633 0 @(base+-2)] [@672 0 @(base+-2)] [@989 0 @(base+-2)] [@1510 0 @(base+-2)] [@1052 0 @(base+-2)] [@1353 0 @(base+-2)] [@772 0 @(base+-2)] [@887 0 @(base+-2)] [@1392 0 @(base+-2)] [@1453 0 @(base+-2)] [@1251 0 @(base+-2)] [@1631 0 @(base+-2)] [@670 0 @(base+-2)] [@971 0 @(base+-2)] [@1492 0 @(base+-2)] [@1034 0 @(base+-2)] [@1351 0 @(base+-2)] [@1149 0 @(base+-2)] [@1010 0 @(base+-2)] [@869 0 @(base+-2)] [@1390 0 @(base+-2)] [@1435 0 @(base+-2)] [@1233 0 @(base+-2)] [@1613 0 @(base+-2)] [@652 0 @(base+-2)] [@953 0 @(base+-2)] [@1474 0 @(base+-2)] [@767 0 @(base+-2)] [@1272 0 @(base+-2)] [@1333 0 @(base+-2)] [@1131 0 @(base+-2)] [@992 0 @(base+-2)] [@851 0 @(base+-2)] [@1372 0 @(base+-2)] [@1417 0 @(base+-2)] [@1231 0 @(base+-2)] [@1595 0 @(base+-2)] [@890 0 @(base+-2)] [@951 0 @(base+-2)] [@1456 0 @(base+-2)] [@749 0 @(base+-2)] [@1270 0 @(base+-2)] [@1315 0 @(base+-2)] [@1113 0 @(base+-2)] [@1634 0 @(base+-2)] [@990 0 @(base+-2)] [@833 0 @(base+-2)] [@1354 0 @(base+-2)] [@1415 0 @(base+-2)] [@1213 0 @(base+-2)] [@1577 0 @(base+-2)] [@872 0 @(base+-2)] [@933 0 @(base+-2)] [@1454 0 @(base+-2)] [@731 0 @(base+-2)] [@1252 0 @(base+-2)] [@1297 0 @(base+-2)] [@1111 0 @(base+-2)] [@1616 0 @(base+-2)] [@972 0 @(base+-2)] [@831 0 @(base+-2)] [@1336 0 @(base+-2)] [@1150 0 @(base+-2)] [@1195 0 @(base+-2)] [@1575 0 @(base+-2)] [@870 0 @(base+-2)] [@915 0 @(base+-2)] [@1436 0 @(base+-2)] [@713 0 @(base+-2)] [@1234 0 @(base+-2)] [@1295 0 @(base+-2)] [@1093 0 @(base+-2)] [@1614 0 @(base+-2)] [@954 0 @(base+-2)] [@752 0 @(base+-2)] [@813 0 @(base+-2)] [@1334 0 @(base+-2)] [@1132 0 @(base+-2)] [@1177 0 @(base+-2)] [@1557 0 @(base+-2)] [@852 0 @(base+-2)] [@897 0 @(base+-2)] [@1418 0 @(base+-2)] [@711 0 @(base+-2)] [@1216 0 @(base+-2)] [@1533 0 @(base+-2)] [@1075 0 @(base+-2)] [@1596 0 @(base+-2)] [@936 0 @(base+-2)] [@750 0 @(base+-2)] [@795 0 @(base+-2)] [@1316 0 @(base+-2)] [@1114 0 @(base+-2)] [@1175 0 @(base+-2)] [@1539 0 @(base+-2)] [@834 0 @(base+-2)] [@693 0 @(base+-2)] [@1214 0 @(base+-2)] [@1515 0 @(base+-2)] [@1057 0 @(base+-2)] [@1578 0 @(base+-2)] [@934 0 @(base+-2)] [@732 0 @(base+-2)] [@777 0 @(base+-2)] [@1298 0 @(base+-2)] [@1096 0 @(base+-2)] [@1157 0 @(base+-2)] [@816 0 @(base+-2)] [@675 0 @(base+-2)] [@1196 0 @(base+-2)] [@1497 0 @(base+-2)] [@1055 0 @(base+-2)] [@1560 0 @(base+-2)] [@916 0 @(base+-2)] [@714 0 @(base+-2)] [@775 0 @(base+-2)] [@1280 0 @(base+-2)] [@1094 0 @(base+-2)] [@1395 0 @(base+-2)] [@814 0 @(base+-2)] [@657 0 @(base+-2)] [@1178 0 @(base+-2)] [@1495 0 @(base+-2)] [@1037 0 @(base+-2)] [@1558 0 @(base+-2)] [@898 0 @(base+-2)] [@696 0 @(base+-2)] [@1013 0 @(base+-2)] [@1534 0 @(base+-2)] [@1076 0 @(base+-2)] [@1377 0 @(base+-2)] [@796 0 @(base+-2)] [@655 0 @(base+-2)] [@1160 0 @(base+-2)] [@1477 0 @(base+-2)] [@1275 0 @(base+-2)] [@1540 0 @(base+-2)] [@694 0 @(base+-2)] [@995 0 @(base+-2)] [@1516 0 @(base+-2)] [@1058 0 @(base+-2)] [@1375 0 @(base+-2)] [@778 0 @(base+-2)] [@893 0 @(base+-2)] [@1158 0 @(base+-2)] [@1459 0 @(base+-2)] [@1257 0 @(base+-2)] [@1637 0 @(base+-2)] [@676 0 @(base+-2)] [@977 0 @(base+-2)] [@1498 0 @(base+-2)] [@1040 0 @(base+-2)] [@1357 0 @(base+-2)] [@1016 0 @(base+-2)] [@875 0 @(base+-2)] [@1396 0 @(base+-2)] [@1441 0 @(base+-2)] [@1255 0 @(base+-2)] [@1619 0 @(base+-2)] [@658 0 @(base+-2)] [@975 0 @(base+-2)] [@1480 0 @(base+-2)] [@1038 0 @(base+-2)] [@1339 0 @(base+-2)] [@1137 0 @(base+-2)] [@1014 0 @(base+-2)] [@857 0 @(base+-2)] [@1378 0 @(base+-2)] [@1439 0 @(base+-2)] [@1237 0 @(base+-2)] [@1601 0 @(base+-2)] [@640 0 @(base+-2)] [@957 0 @(base+-2)] [@1478 0 @(base+-2)] [@755 0 @(base+-2)] [@1276 0 @(base+-2)] [@1321 0 @(base+-2)] [@1135 0 @(base+-2)] [@996 0 @(base+-2)] [@855 0 @(base+-2)] [@1360 0 @(base+-2)] [@1421 0 @(base+-2)] [@1219 0 @(base+-2)] [@1599 0 @(base+-2)] [@894 0 @(base+-2)] [@939 0 @(base+-2)] [@1460 0 @(base+-2)] [@737 0 @(base+-2)] [@1258 0 @(base+-2)] [@1319 0 @(base+-2)] [@1117 0 @(base+-2)] [@1638 0 @(base+-2)] [@978 0 @(base+-2)] [@837 0 @(base+-2)] [@1358 0 @(base+-2)] [@1201 0 @(base+-2)] [@1581 0 @(base+-2)] [@876 0 @(base+-2)] [@921 0 @(base+-2)] [@1442 0 @(base+-2)] [@735 0 @(base+-2)] [@1240 0 @(base+-2)] [@1301 0 @(base+-2)] [@1099 0 @(base+-2)] [@1620 0 @(base+-2)] [@960 0 @(base+-2)] [@819 0 @(base+-2)] [@1340 0 @(base+-2)] [@1138 0 @(base+-2)] [@1199 0 @(base+-2)] [@1563 0 @(base+-2)] [@858 0 @(base+-2)] [@919 0 @(base+-2)] [@1424 0 @(base+-2)] [@717 0 @(base+-2)] [@1238 0 @(base+-2)] [@1283 0 @(base+-2)] [@1081 0 @(base+-2)] [@1602 0 @(base+-2)] [@958 0 @(base+-2)] [@756 0 @(base+-2)] [@801 0 @(base+-2)] [@1322 0 @(base+-2)] [@1120 0 @(base+-2)] [@1181 0 @(base+-2)] [@1545 0 @(base+-2)] [@840 0 @(base+-2)] [@901 0 @(base+-2)] [@1422 0 @(base+-2)] [@699 0 @(base+-2)] [@1220 0 @(base+-2)] [@1521 0 @(base+-2)] [@1079 0 @(base+-2)] [@1584 0 @(base+-2)] [@940 0 @(base+-2)] [@738 0 @(base+-2)] [@799 0 @(base+-2)] [@1304 0 @(base+-2)] [@1118 0 @(base+-2)] [@1163 0 @(base+-2)] [@1543 0 @(base+-2)] [@838 0 @(base+-2)] [@681 0 @(base+-2)] [@1202 0 @(base+-2)] [@1519 0 @(base+-2)] [@1061 0 @(base+-2)] [@1582 0 @(base+-2)] [@922 0 @(base+-2)] [@720 0 @(base+-2)] [@781 0 @(base+-2)] [@1302 0 @(base+-2)] [@1100 0 @(base+-2)] [@1401 0 @(base+-2)] [@820 0 @(base+-2)] [@679 0 @(base+-2)] [@1184 0 @(base+-2)] [@1501 0 @(base+-2)] [@1043 0 @(base+-2)] [@1564 0 @(base+-2)] [@904 0 @(base+-2)] [@718 0 @(base+-2)] [@1019 0 @(base+-2)] [@1284 0 @(base+-2)] [@1082 0 @(base+-2)] [@1399 0 @(base+-2)] [@802 0 @(base+-2)] [@661 0 @(base+-2)] [@1182 0 @(base+-2)] [@1483 0 @(base+-2)] [@1025 0 @(base+-2)] [@1546 0 @(base+-2)] [@902 0 @(base+-2)] [@700 0 @(base+-2)] [@1001 0 @(base+-2)] [@1522 0 @(base+-2)] [@1064 0 @(base+-2)] [@1381 0 @(base+-2)] [@784 0 @(base+-2)] [@643 0 @(base+-2)] [@1164 0 @(base+-2)] [@1465 0 @(base+-2)] [@1279 0 @(base+-2)] [@682 0 @(base+-2)] [@999 0 @(base+-2)] [@1504 0 @(base+-2)] [@1062 0 @(base+-2)] [@1363 0 @(base+-2)] [@782 0 @(base+-2)] [@881 0 @(base+-2)] [@1402 0 @(base+-2)] [@1463 0 @(base+-2)] [@1261 0 @(base+-2)] [@1625 0 @(base+-2)] [@664 0 @(base+-2)] [@981 0 @(base+-2)] [@1502 0 @(base+-2)] [@1044 0 @(base+-2)] [@1345 0 @(base+-2)] [@1020 0 @(base+-2)] [@879 0 @(base+-2)] [@1384 0 @(base+-2)] [@1445 0 @(base+-2)] [@1243 0 @(base+-2)] [@1623 0 @(base+-2)] [@662 0 @(base+-2)] [@963 0 @(base+-2)] [@1484 0 @(base+-2)] [@761 0 @(base+-2)] [@1026 0 @(base+-2)] [@1343 0 @(base+-2)] [@1141 0 @(base+-2)] [@1002 0 @(base+-2)] [@861 0 @(base+-2)] [@1382 0 @(base+-2)] [@1427 0 @(base+-2)] [@1225 0 @(base+-2)] [@1605 0 @(base+-2)] [@644 0 @(base+-2)] [@945 0 @(base+-2)] [@1466 0 @(base+-2)] [@759 0 @(base+-2)] [@1264 0 @(base+-2)] [@1325 0 @(base+-2)] [@1123 0 @(base+-2)] [@984 0 @(base+-2)] [@843 0 @(base+-2)] [@1364 0 @(base+-2)] [@1409 0 @(base+-2)] [@1223 0 @(base+-2)] [@1587 0 @(base+-2)] [@882 0 @(base+-2)] [@943 0 @(base+-2)] [@1448 0 @(base+-2)] [@741 0 @(base+-2)] [@1262 0 @(base+-2)] [@1307 0 @(base+-2)] [@1105 0 @(base+-2)] [@1626 0 @(base+-2)] [@982 0 @(base+-2)] [@825 0 @(base+-2)] [@1346 0 @(base+-2)] [@639 0 @(base+-2)] [@1144 0 @(base+-2)] [@1205 0 @(base+-2)] [@1569 0 @(base+-2)] [@864 0 @(base+-2)] [@925 0 @(base+-2)] [@1446 0 @(base+-2)] [@723 0 @(base+-2)] [@1244 0 @(base+-2)] [@1289 0 @(base+-2)] [@1103 0 @(base+-2)] [@1608 0 @(base+-2)] [@964 0 @(base+-2)] [@762 0 @(base+-2)] [@823 0 @(base+-2)] [@1328 0 @(base+-2)] [@1142 0 @(base+-2)] [@1187 0 @(base+-2)] [@1567 0 @(base+-2)] [@862 0 @(base+-2)] [@907 0 @(base+-2)] [@1428 0 @(base+-2)] [@705 0 @(base+-2)] [@1226 0 @(base+-2)] [@1287 0 @(base+-2)] [@1085 0 @(base+-2)] [@1606 0 @(base+-2)] [@946 0 @(base+-2)] [@744 0 @(base+-2)] [@805 0 @(base+-2)] [@1326 0 @(base+-2)] [@1124 0 @(base+-2)] [@1169 0 @(base+-2)] [@1549 0 @(base+-2)] [@844 0 @(base+-2)] [@1410 0 @(base+-2)] [@703 0 @(base+-2)] [@1208 0 @(base+-2)] [@1525 0 @(base+-2)] [@1067 0 @(base+-2)] [@1588 0 @(base+-2)] [@928 0 @(base+-2)] [@742 0 @(base+-2)] [@787 0 @(base+-2)] [@1308 0 @(base+-2)] [@1106 0 @(base+-2)] [@1167 0 @(base+-2)] [@826 0 @(base+-2)] [@685 0 @(base+-2)] [@1206 0 @(base+-2)] [@1507 0 @(base+-2)] [@1049 0 @(base+-2)] [@1570 0 @(base+-2)] [@926 0 @(base+-2)] [@724 0 @(base+-2)] [@769 0 @(base+-2)] [@1290 0 @(base+-2)] [@1088 0 @(base+-2)] [@1405 0 @(base+-2)] [@808 0 @(base+-2)] [@667 0 @(base+-2)] [@1188 0 @(base+-2)] [@1489 0 @(base+-2)] [@1047 0 @(base+-2)] [@1552 0 @(base+-2)] [@908 0 @(base+-2)] [@706 0 @(base+-2)] [@1023 0 @(base+-2)] [@1528 0 @(base+-2)] [@1086 0 @(base+-2)] [@1387 0 @(base+-2)] [@806 0 @(base+-2)] [@649 0 @(base+-2)] [@1170 0 @(base+-2)] [@1487 0 @(base+-2)] [@1029 0 @(base+-2)] [@1550 0 @(base+-2)] [@688 0 @(base+-2)] [@1005 0 @(base+-2)] [@1526 0 @(base+-2)] [@1068 0 @(base+-2)] [@1369 0 @(base+-2)] [@788 0 @(base+-2)] [@647 0 @(base+-2)] [@1152 0 @(base+-2)] [@1469 0 @(base+-2)] [@1267 0 @(base+-2)] [@686 0 @(base+-2)] [@987 0 @(base+-2)] [@1508 0 @(base+-2)] [@1050 0 @(base+-2)] [@1367 0 @(base+-2)] [@770 0 @(base+-2)] [@885 0 @(base+-2)] [@1406 0 @(base+-2)] [@1451 0 @(base+-2)] [@1249 0 @(base+-2)] [@1629 0 @(base+-2)] [@668 0 @(base+-2)] [@969 0 @(base+-2)] [@1490 0 @(base+-2)] [@1032 0 @(base+-2)] [@1349 0 @(base+-2)] [@1147 0 @(base+-2)] [@1008 0 @(base+-2)] [@867 0 @(base+-2)] [@1388 0 @(base+-2)] [@1433 0 @(base+-2)] [@1247 0 @(base+-2)] [@1611 0 @(base+-2)] [@650 0 @(base+-2)] [@967 0 @(base+-2)] [@1472 0 @(base+-2)] [@765 0 @(base+-2)] [@1030 0 @(base+-2)] [@1331 0 @(base+-2)] [@1129 0 @(base+-2)] [@1006 0 @(base+-2)] [@849 0 @(base+-2)] [@1370 0 @(base+-2)] [@1431 0 @(base+-2)] [@1229 0 @(base+-2)] [@1593 0 @(base+-2)] [@888 0 @(base+-2)] [@949 0 @(base+-2)] [@1470 0 @(base+-2)] [@747 0 @(base+-2)] [@1268 0 @(base+-2)] [@1313 0 @(base+-2)] [@1127 0 @(base+-2)] [@1632 0 @(base+-2)] [@988 0 @(base+-2)] [@847 0 @(base+-2)] [@1352 0 @(base+-2)] [@1413 0 @(base+-2)] [@1211 0 @(base+-2)] [@1591 0 @(base+-2)] [@886 0 @(base+-2)] [@931 0 @(base+-2)] [@1452 0 @(base+-2)] [@729 0 @(base+-2)] [@1250 0 @(base+-2)] [@1311 0 @(base+-2)] [@1109 0 @(base+-2)] [@1630 0 @(base+-2)] [@970 0 @(base+-2)] [@829 0 @(base+-2)] [@1350 0 @(base+-2)] [@1148 0 @(base+-2)] [@1193 0 @(base+-2)] [@1573 0 @(base+-2)] [@868 0 @(base+-2)] [@913 0 @(base+-2)] [@1434 0 @(base+-2)] [@727 0 @(base+-2)] [@1232 0 @(base+-2)] [@1293 0 @(base+-2)] [@1091 0 @(base+-2)] [@1612 0 @(base+-2)] [@952 0 @(base+-2)] [@766 0 @(base+-2)] [@811 0 @(base+-2)] [@1332 0 @(base+-2)] [@1130 0 @(base+-2)] [@1191 0 @(base+-2)] [@1555 0 @(base+-2)] [@850 0 @(base+-2)] [@911 0 @(base+-2)] [@1416 0 @(base+-2)] [@709 0 @(base+-2)] [@1230 0 @(base+-2)] [@1531 0 @(base+-2)] [@1073 0 @(base+-2)] [@1594 0 @(base+-2)] [@950 0 @(base+-2)] [@748 0 @(base+-2)] [@793 0 @(base+-2)] [@1314 0 @(base+-2)] [@1112 0 @(base+-2)] [@1173 0 @(base+-2)] [@1537 0 @(base+-2)] [@832 0 @(base+-2)] [@1414 0 @(base+-2)] [@691 0 @(base+-2)] [@1212 0 @(base+-2)] [@1513 0 @(base+-2)] [@1071 0 @(base+-2)] [@1576 0 @(base+-2)] [@932 0 @(base+-2)] [@730 0 @(base+-2)] [@791 0 @(base+-2)] [@1296 0 @(base+-2)] [@1110 0 @(base+-2)] [@1155 0 @(base+-2)] [@830 0 @(base+-2)] [@673 0 @(base+-2)] [@1194 0 @(base+-2)] [@1511 0 @(base+-2)] [@1053 0 @(base+-2)] [@1574 0 @(base+-2)] [@914 0 @(base+-2)] [@712 0 @(base+-2)] [@773 0 @(base+-2)] [@1294 0 @(base+-2)] [@1092 0 @(base+-2)] [@1393 0 @(base+-2)] [@812 0 @(base+-2)] [@671 0 @(base+-2)] [@1176 0 @(base+-2)] [@1493 0 @(base+-2)] [@1035 0 @(base+-2)] [@1556 0 @(base+-2)] [@896 0 @(base+-2)] [@710 0 @(base+-2)] [@1011 0 @(base+-2)] [@1532 0 @(base+-2)] [@1074 0 @(base+-2)] [@1391 0 @(base+-2)] [@794 0 @(base+-2)] [@653 0 @(base+-2)] [@1174 0 @(base+-2)] [@1475 0 @(base+-2)] [@1273 0 @(base+-2)] [@1538 0 @(base+-2)] [@692 0 @(base+-2)] [@993 0 @(base+-2)] [@1514 0 @(base+-2)] [@1056 0 @(base+-2)] [@1373 0 @(base+-2)] [@776 0 @(base+-2)] [@891 0 @(base+-2)] [@1156 0 @(base+-2)] [@1457 0 @(base+-2)] [@1271 0 @(base+-2)] [@1635 0 @(base+-2)] [@674 0 @(base+-2)] [@991 0 @(base+-2)] [@1496 0 @(base+-2)] [@1054 0 @(base+-2)] [@1355 0 @(base+-2)] [@774 0 @(base+-2)] [@873 0 @(base+-2)] [@1394 0 @(base+-2)] [@1455 0 @(base+-2)] [@1253 0 @(base+-2)] [@1617 0 @(base+-2)] [@656 0 @(base+-2)] [@973 0 @(base+-2)] [@1494 0 @(base+-2)] [@1036 0 @(base+-2)] [@1337 0 @(base+-2)] [@1151 0 @(base+-2)] [@1012 0 @(base+-2)] [@871 0 @(base+-2)] [@1376 0 @(base+-2)] [@1437 0 @(base+-2)] [@1235 0 @(base+-2)] [@1615 0 @(base+-2)] [@654 0 @(base+-2)] [@955 0 @(base+-2)] [@1476 0 @(base+-2)] [@753 0 @(base+-2)] [@1274 0 @(base+-2)] [@1335 0 @(base+-2)] [@1133 0 @(base+-2)] [@994 0 @(base+-2)] [@853 0 @(base+-2)] [@1374 0 @(base+-2)] [@1419 0 @(base+-2)] [@1217 0 @(base+-2)] [@1597 0 @(base+-2)] [@892 0 @(base+-2)] [@937 0 @(base+-2)] [@1458 0 @(base+-2)] [@751 0 @(base+-2)] [@1256 0 @(base+-2)] [@1317 0 @(base+-2)] [@1115 0 @(base+-2)] [@1636 0 @(base+-2)] [@976 0 @(base+-2)] [@835 0 @(base+-2)] [@1356 0 @(base+-2)] [@1215 0 @(base+-2)] [@1579 0 @(base+-2)] [@874 0 @(base+-2)] [@935 0 @(base+-2)] [@1440 0 @(base+-2)] [@733 0 @(base+-2)] [@1254 0 @(base+-2)] [@1299 0 @(base+-2)] [@1097 0 @(base+-2)] [@1618 0 @(base+-2)] [@974 0 @(base+-2)] [@817 0 @(base+-2)] [@1338 0 @(base+-2)] [@1136 0 @(base+-2)] [@1197 0 @(base+-2)] [@1561 0 @(base+-2)] [@856 0 @(base+-2)] [@917 0 @(base+-2)] [@1438 0 @(base+-2)] [@715 0 @(base+-2)] [@1236 0 @(base+-2)] [@1281 0 @(base+-2)] [@1095 0 @(base+-2)] [@1600 0 @(base+-2)] [@956 0 @(base+-2)] [@754 0 @(base+-2)] [@815 0 @(base+-2)] [@1320 0 @(base+-2)] [@1134 0 @(base+-2)] [@1179 0 @(base+-2)] [@1559 0 @(base+-2)] [@854 0 @(base+-2)] [@899 0 @(base+-2)] [@1420 0 @(base+-2)] [@697 0 @(base+-2)] [@1218 0 @(base+-2)] [@1535 0 @(base+-2)] [@1077 0 @(base+-2)] [@1598 0 @(base+-2)] [@938 0 @(base+-2)] [@736 0 @(base+-2)] [@797 0 @(base+-2)] [@1318 0 @(base+-2)] [@1116 0 @(base+-2)] [@1161 0 @(base+-2)] [@1541 0 @(base+-2)] [@836 0 @(base+-2)] [@695 0 @(base+-2)] [@1200 0 @(base+-2)] [@1517 0 @(base+-2)] [@1059 0 @(base+-2)] [@1580 0 @(base+-2)] [@920 0 @(base+-2)] [@734 0 @(base+-2)] [@779 0 @(base+-2)] [@1300 0 @(base+-2)] [@1098 0 @(base+-2)] [@1159 0 @(base+-2)] [@818 0 @(base+-2)] [@677 0 @(base+-2)] [@1198 0 @(base+-2)] [@1499 0 @(base+-2)] [@1041 0 @(base+-2)] [@1562 0 @(base+-2)] [@918 0 @(base+-2)] [@716 0 @(base+-2)] [@1017 0 @(base+-2)] [@1282 0 @(base+-2)] [@1080 0 @(base+-2)] [@1397 0 @(base+-2)] [@800 0 @(base+-2)] [@659 0 @(base+-2)] [@1180 0 @(base+-2)] [@1481 0 @(base+-2)] [@1039 0 @(base+-2)] [@1544 0 @(base+-2)] [@900 0 @(base+-2)] [@698 0 @(base+-2)] [@1015 0 @(base+-2)] [@1520 0 @(base+-2)] [@1078 0 @(base+-2)] [@1379 0 @(base+-2)] [@798 0 @(base+-2)] [@641 0 @(base+-2)] [@1162 0 @(base+-2)] [@1479 0 @(base+-2)] [@1277 0 @(base+-2)] [@1542 0 @(base+-2)] [@680 0 @(base+-2)] [@997 0 @(base+-2)] [@1518 0 @(base+-2)] [@1060 0 @(base+-2)] [@1361 0 @(base+-2)]
+     # Comment: return
+     # Jumps from {592}, jumps to {598}
+   596: AdjustRelativeBaseOp [-3]
+     # Jumps from {596}, jumps to {37, 180, 228, 279}
+   598: JmpIfTrueOp [1 @(base+0)]
+
+branch37:
+     # Comment: Output x
+     # Jumps from {598}, jumps to {39}
+   37: OutputOp [@382]
+     # Comment: Output y
+     # Jumps from {37}, jumps to {41}
+   39: OutputOp [@383]
+     # Comment: Output return value from call (the tile there)
+     # Jumps from {39}, jumps to {43}
+     # Screen update (1000 positions, 1 tile types)
+   41: OutputOp [@(base+1)]
+     # Jumps from {41}, jumps to {47}
+   43: AddOp [@382 1 @382]
+     # Jumps from {43}, jumps to {51}
+   47: LessThanOp [@382 40 @381]
+     # Jumps from {47}, jumps to {54, 22}
+   51: JmpIfTrueOp [@381 22]
+
+branch54:
+     # Jumps from {51}, jumps to {58}
+   54: AddOp [@383 1 @383]
+     # Jumps from {54}, jumps to {62}
+   58: LessThanOp [@383 25 @381]
+     # Jumps from {58}, jumps to {65, 18}
+   62: JmpIfTrueOp [@381 18]
+
+branch65:
+     # Jumps from {62}, jumps to {69}
+   65: JmpIfFalseOp [@385 69]
+     # Jumps from {65}, jumps to {71}
+   69: OutputOp [-1]
+     # Jumps from {69}, jumps to {73}
+   71: OutputOp [0]
+     # Game score update
+     # Jumps from {71}, jumps to {75}
+   73: OutputOp [@386]
+
+branch75:
+     # Jumps from {73, 369}, jumps to {77}
+   75: InputOp [@384]
+     # Jumps from {75}, jumps to {81}
+   77: LessThanOp [@384 0 @381]
+     # Jumps from {77}, jumps to {84, 94}
+   81: JmpIfTrueOp [@381 94]
+
+branch84:
+     # Jumps from {81}, jumps to {88}
+   84: LessThanOp [0 @384 @381]
+     # Jumps from {84}, jumps to {91, 108}
+   88: JmpIfTrueOp [@381 108]
+
+branch91:
+     # Jumps from {88}, jumps to {161}
+   91: JmpIfFalseOp [0 161]
+
+branch161:
+     # Jumps from {91, 316, 261, 575}, jumps to {165}
+   161: AddOp [0 0 @384]
+     # Jumps from {161}, jumps to {169}
+   165: AddOp [@388 @390 @(base+1)]
+     # Jumps from {165}, jumps to {173}
+   169: MultiplyOp [@389 1 @(base+2)]
+     # Jumps from {169}, jumps to {177}
+   173: AddOp [180 0 @(base+0)]
+     # Jumps from {173}, jumps to {578}
+   177: JmpIfTrueOp [1 578]
+
+branch180:
+     # Jumps from {598}, jumps to {213, 183}
+   180: JmpIfFalseOp [@(base+1) 213]
+
+branch213:
+     # Jumps from {209, 180}, jumps to {217}
+   213: MultiplyOp [1 @388 @(base+1)]
+     # Jumps from {213}, jumps to {221}
+   217: AddOp [@389 @391 @(base+2)]
+     # Jumps from {217}, jumps to {225}
+   221: MultiplyOp [228 1 @(base+0)]
+     # Jumps from {221}, jumps to {578}
+   225: JmpIfFalseOp [0 578]
+
+branch228:
+     # Jumps from {598}, jumps to {261, 231}
+   228: JmpIfFalseOp [@(base+1) 261]
+
+branch261:
+     # Jumps from {257, 228}, jumps to {264, 161}
+   261: JmpIfTrueOp [@384 161]
+
+branch264:
+     # Jumps from {261}, jumps to {268}
+   264: AddOp [@388 @390 @(base+1)]
+     # Jumps from {264}, jumps to {272}
+   268: AddOp [@389 @391 @(base+2)]
+     # Jumps from {268}, jumps to {276}
+   272: AddOp [0 279 @(base+0)]
+     # Jumps from {272}, jumps to {578}
+   276: JmpIfTrueOp [1 578]
+
+branch279:
+     # Jumps from {598}, jumps to {282, 316}
+   279: JmpIfFalseOp [@(base+1) 316]
+
+branch316:
+     # Jumps from {312, 279}, jumps to {161, 319}
+   316: JmpIfTrueOp [@384 161]
+
+branch319:
+     # Jumps from {316}, jumps to {323}
+   319: MultiplyOp [1 @388 @(base+1)]
+     # Jumps from {319}, jumps to {327}
+   323: AddOp [0 @389 @(base+2)]
+     # Jumps from {323}, jumps to {331}
+   327: AddOp [0 0 @(base+3)]
+     # Jumps from {327}, jumps to {335}
+   331: AddOp [0 338 @(base+0)]
+     # Jumps from {331}, jumps to {549}
+   335: JmpIfFalseOp [0 549]
+
+branch549:
+     # Jumps from {135, 362, 335, 411, 158}, jumps to {551}
+   549: AdjustRelativeBaseOp [4]
+     # Jumps from {549}, jumps to {555}
+   551: MultiplyOp [@(base+-2) 40 @566]
+     # Jumps from {551}, jumps to {559}
+   555: AddOp [@(base+-3) @566 @566]
+     # Jumps from {555}, jumps to {563}
+   559: AddOp [639 @566 @566]
+     # Jumps from {559}, jumps to {567}
+   563: AddOp [@(base+-1) 0 @1603] [@(base+-1) 0 @1569] [@(base+-1) 0 @1568] [@(base+-1) 0 @1422] [@(base+-1) 0 @1564] [@(base+-1) 0 @1571] [@(base+-1) 0 @1457] [@(base+-1) 0 @1567] [@(base+-1) 0 @1492] [@(base+-1) 0 @1570] [@(base+-1) 0 @1566] [@(base+-1) 0 @1573] [@(base+-1) 0 @1494] [@(base+-1) 0 @1572] [@(base+-1) 0 @1533] [@(base+-1) 0 @1330] [@(base+-1) 0 @1408] [@(base+-1) 0 @1369] [@(base+-1) 0 @1575] [@(base+-1) 0 @1447] [@(base+-1) 0 @1461] [@(base+-1) 0 @1539] [@(base+-1) 0 @1368] [@(base+-1) 0 @1574] [@(base+-1) 0 @1410] [@(base+-1) 0 @1577] [@(base+-1) 0 @1498] [@(base+-1) 0 @1576] [@(base+-1) 0 @1579] [@(base+-1) 0 @1451] [@(base+-1) 0 @1376] [@(base+-1) 0 @1486] [@(base+-1) 0 @1500] [@(base+-1) 0 @1578] [@(base+-1) 0 @1416] [@(base+-1) 0 @1455] [@(base+-1) 0 @1383] [@(base+-1) 0 @1525]
+     # Jumps from {563}, jumps to {569}
+   567: OutputOp [@(base+-3)]
+     # Jumps from {567}, jumps to {571}
+   569: OutputOp [@(base+-2)]
+     # Jumps from {569}, jumps to {573}
+     # Screen update (38 positions, 1 tile types)
+   571: OutputOp [@(base+-1)]
+     # Jumps from {571}, jumps to {575}
+   573: AdjustRelativeBaseOp [-4]
+     # Jumps from {573}, jumps to {161, 138, 365, 338, 414}
+   575: JmpIfTrueOp [1 @(base+0)]
+
+branch338:
+     # Jumps from {575}, jumps to {342}
+   338: AddOp [@388 @390 @388]
+     # Jumps from {338}, jumps to {346}
+   342: AddOp [@389 @391 @389]
+     # Jumps from {342}, jumps to {350}
+   346: AddOp [0 @388 @(base+1)]
+     # Jumps from {346}, jumps to {354}
+   350: AddOp [@389 0 @(base+2)]
+     # Jumps from {350}, jumps to {358}
+   354: MultiplyOp [4 1 @(base+3)]
+     # Jumps from {354}, jumps to {362}
+   358: AddOp [0 365 @(base+0)]
+     # Jumps from {358}, jumps to {549}
+   362: JmpIfTrueOp [1 549]
+
+branch365:
+     # Jumps from {575}, jumps to {369}
+   365: LessThanOp [@389 24 @381]
+     # Jumps from {365}, jumps to {75, 372}
+   369: JmpIfTrueOp [@381 75]
+
+branch231:
+     # Jumps from {228}, jumps to {235}
+   231: EqualsOp [@(base+1) 2 @381]
+     # Jumps from {231}, jumps to {253, 238}
+   235: JmpIfFalseOp [@381 253]
+
+branch253:
+     # Jumps from {235, 453}, jumps to {257}
+   253: MultiplyOp [@391 -1 @391]
+     # Jumps from {253}, jumps to {261}
+   257: AddOp [0 1 @384]
+
+branch282:
+     # Jumps from {279}, jumps to {286}
+   282: EqualsOp [@(base+1) 2 @381]
+     # Jumps from {282}, jumps to {304, 289}
+   286: JmpIfFalseOp [@381 304]
+
+branch289:
+     # Jumps from {286}, jumps to {293}
+   289: AddOp [@388 @390 @(base+1)]
+     # Jumps from {289}, jumps to {297}
+   293: AddOp [@389 @391 @(base+2)]
+     # Jumps from {293}, jumps to {301}
+   297: AddOp [0 304 @(base+0)]
+     # Jumps from {297}, jumps to {393}
+   301: JmpIfTrueOp [1 393]
+
+branch393:
+     # Jumps from {202, 250, 301}, jumps to {395}
+   393: AdjustRelativeBaseOp [3]
+     # Jumps from {393}, jumps to {399}
+   395: AddOp [@(base+-2) 0 @(base+1)]
+     # Jumps from {395}, jumps to {403}
+   399: MultiplyOp [@(base+-1) 1 @(base+2)]
+     # Jumps from {399}, jumps to {407}
+   403: MultiplyOp [1 0 @(base+3)]
+     # Jumps from {403}, jumps to {411}
+   407: AddOp [414 0 @(base+0)]
+     # Jumps from {407}, jumps to {549}
+   411: JmpIfTrueOp [1 549]
+
+branch414:
+     # Jumps from {575}, jumps to {418}
+   414: MultiplyOp [@(base+-2) 1 @(base+1)]
+     # Jumps from {414}, jumps to {422}
+   418: AddOp [@(base+-1) 0 @(base+2)]
+     # Jumps from {418}, jumps to {426}
+   422: AddOp [429 0 @(base+0)]
+     # Jumps from {422}, jumps to {601}
+   426: JmpIfTrueOp [1 601]
+     # Jumps from {426}, jumps to {603}
+   601: AdjustRelativeBaseOp [3]
+     # Jumps from {601}, jumps to {607}
+   603: MultiplyOp [25 @(base+-2) @(base+1)]
+     # Jumps from {603}, jumps to {611}
+   607: AddOp [@(base+1) @(base+-1) @(base+1)]
+     # Jumps from {607}, jumps to {615}
+   611: AddOp [0 503 @(base+2)]
+     # Jumps from {611}, jumps to {619}
+   615: AddOp [366 0 @(base+3)]
+     # Jumps from {615}, jumps to {623}
+   619: MultiplyOp [1 1000 @(base+4)]
+     # Jumps from {619}, jumps to {627}
+   623: AddOp [630 0 @(base+0)]
+     # Jumps from {623}, jumps to {456}
+   627: JmpIfTrueOp [1 456]
+     # Jumps from {627}, jumps to {458}
+   456: AdjustRelativeBaseOp [8]
+     # Jumps from {456}, jumps to {462}
+   458: MultiplyOp [@(base+-7) @(base+-6) @(base+-3)]
+     # Jumps from {458}, jumps to {466}
+   462: AddOp [@(base+-3) @(base+-5) @(base+-3)]
+     # Jumps from {462}, jumps to {470}
+   466: MultiplyOp [@(base+-4) 64 @(base+-2)]
+     # Jumps from {466}, jumps to {474}
+   470: LessThanOp [@(base+-3) @(base+-2) @381]
+     # Jumps from {470}, jumps to {477}
+   474: JmpIfTrueOp [@381 492]
+     # Jumps from {474}, jumps to {481}
+   477: MultiplyOp [@(base+-2) -1 @(base+-1)]
+
+branch481:
+     # Jumps from {489, 477}, jumps to {485}
+   481: AddOp [@(base+-3) @(base+-1) @(base+-3)]
+     # Jumps from {481}, jumps to {489}
+   485: LessThanOp [@(base+-3) @(base+-2) @381]
+     # Jumps from {485}, jumps to {481, 492}
+   489: JmpIfFalseOp [@381 481]
+
+branch492:
+     # Jumps from {489}, jumps to {496}
+   492: MultiplyOp [@(base+-4) 8 @(base+-2)]
+     # Jumps from {492}, jumps to {500}
+   496: LessThanOp [@(base+-3) @(base+-2) @381]
+     # Jumps from {496}, jumps to {518, 503}
+   500: JmpIfTrueOp [@381 518]
+
+branch503:
+     # Jumps from {500}, jumps to {507}
+   503: MultiplyOp [@(base+-2) -1 @(base+-1)]
+
+branch507:
+     # Jumps from {515, 503}, jumps to {511}
+   507: AddOp [@(base+-3) @(base+-1) @(base+-3)]
+     # Jumps from {507}, jumps to {515}
+   511: LessThanOp [@(base+-3) @(base+-2) @381]
+     # Jumps from {511}, jumps to {507, 518}
+   515: JmpIfFalseOp [@381 507]
+
+branch518:
+     # Jumps from {515, 500}, jumps to {522}
+   518: LessThanOp [@(base+-3) @(base+-4) @381]
+     # Jumps from {518}, jumps to {525}
+   522: JmpIfTrueOp [@381 540]
+     # Jumps from {522}, jumps to {529}
+   525: MultiplyOp [@(base+-4) -1 @(base+-1)]
+
+branch529:
+     # Jumps from {537, 525}, jumps to {533}
+   529: AddOp [@(base+-3) @(base+-1) @(base+-3)]
+     # Jumps from {529}, jumps to {537}
+   533: LessThanOp [@(base+-3) @(base+-4) @381]
+     # Jumps from {533}, jumps to {529, 540}
+   537: JmpIfFalseOp [@381 529]
+
+branch540:
+     # Jumps from {537}, jumps to {544}
+   540: AddOp [0 @(base+-3) @(base+-7)]
+     # Jumps from {540}, jumps to {546}
+   544: AdjustRelativeBaseOp [-8]
+     # Jumps from {544}, jumps to {630}
+   546: JmpIfFalseOp [0 @(base+0)]
+     # Jumps from {546}, jumps to {634}
+   630: AddOp [@(base+1) 1639 @(base+-2)]
+     # Jumps from {630}, jumps to {636}
+   634: AdjustRelativeBaseOp [-3]
+     # Jumps from {634}, jumps to {429}
+   636: JmpIfFalseOp [0 @(base+0)]
+     # Jumps from {636}, jumps to {433}
+   429: AddOp [@(base+1) 0 @435]
+     # Jumps from {429}, jumps to {437}
+   433: AddOp [@386 @1859 @386] [@386 @1809 @386] [@386 @1834 @386] [@386 @1881 @386] [@386 @2234 @386]
+     # Jumps from {433}, jumps to {439}
+   437: OutputOp [-1]
+     # Jumps from {437}, jumps to {441}
+   439: OutputOp [0]
+     # Game score update
+     # Jumps from {439}, jumps to {443}
+   441: OutputOp [@386]
+     # Jumps from {441}, jumps to {447}
+   443: AddOp [@387 -1 @387]
+     # Jumps from {443}, jumps to {451}
+   447: JmpIfTrueOp [@387 451]
+     # Jumps from {447}, jumps to {453}
+   451: AdjustRelativeBaseOp [-3]
+     # Jumps from {451}, jumps to {304, 205, 253}
+   453: JmpIfFalseOp [0 @(base+0)]
+
+branch304:
+     # Jumps from {453, 286}, jumps to {308}
+   304: MultiplyOp [@390 -1 @390]
+     # Jumps from {304}, jumps to {312}
+   308: MultiplyOp [@391 -1 @391]
+     # Jumps from {308}, jumps to {316}
+   312: AddOp [0 1 @384]
+
+branch94:
+     # Jumps from {81}, jumps to {98}
+   94: LessThanOp [1 @392 @381]
+     # Jumps from {94}, jumps to {101}
+   98: JmpIfFalseOp [@381 161]
+     # Jumps from {98}, jumps to {105}
+   101: AddOp [-1 0 @384]
+     # Jumps from {101}, jumps to {119}
+   105: JmpIfFalseOp [0 119]
+
+branch119:
+     # Jumps from {105, 115}, jumps to {123}
+   119: MultiplyOp [@392 1 @(base+1)]
+     # Jumps from {119}, jumps to {127}
+   123: AddOp [23 0 @(base+2)]
+     # Jumps from {123}, jumps to {131}
+   127: AddOp [0 0 @(base+3)]
+     # Jumps from {127}, jumps to {135}
+   131: MultiplyOp [138 1 @(base+0)]
+     # Jumps from {131}, jumps to {549}
+   135: JmpIfTrueOp [1 549]
+
+branch138:
+     # Jumps from {575}, jumps to {142}
+   138: AddOp [@392 @384 @392]
+     # Jumps from {138}, jumps to {146}
+   142: MultiplyOp [1 @392 @(base+1)]
+     # Jumps from {142}, jumps to {150}
+   146: MultiplyOp [1 23 @(base+2)]
+     # Jumps from {146}, jumps to {154}
+   150: MultiplyOp [1 3 @(base+3)]
+     # Jumps from {150}, jumps to {158}
+   154: MultiplyOp [161 1 @(base+0)]
+     # Jumps from {154}, jumps to {549}
+   158: JmpIfFalseOp [0 549]
+
+branch238:
+     # Jumps from {235}, jumps to {242}
+   238: AddOp [@388 0 @(base+1)]
+     # Jumps from {238}, jumps to {246}
+   242: AddOp [@389 @391 @(base+2)]
+     # Jumps from {242}, jumps to {250}
+   246: MultiplyOp [253 1 @(base+0)]
+     # Jumps from {246}, jumps to {393}
+   250: JmpIfTrueOp [1 393]
+
+branch108:
+     # Jumps from {88}, jumps to {112}
+   108: LessThanOp [@392 38 @381]
+     # Jumps from {108}, jumps to {115}
+   112: JmpIfFalseOp [@381 161]
+     # Jumps from {112}, jumps to {119}
+   115: MultiplyOp [1 1 @384]
+
+branch183:
+     # Jumps from {180}, jumps to {187}
+   183: EqualsOp [@(base+1) 2 @381]
+     # Jumps from {183}, jumps to {190}
+   187: JmpIfFalseOp [@381 205]
+     # Jumps from {187}, jumps to {194}
+   190: AddOp [@388 @390 @(base+1)]
+     # Jumps from {190}, jumps to {198}
+   194: AddOp [@389 0 @(base+2)]
+     # Jumps from {194}, jumps to {202}
+   198: MultiplyOp [1 205 @(base+0)]
+     # Jumps from {198}, jumps to {393}
+   202: JmpIfFalseOp [0 393]
+
+branch205:
+     # Jumps from {453}, jumps to {209}
+   205: MultiplyOp [@390 -1 @390]
+     # Jumps from {205}, jumps to {213}
+   209: MultiplyOp [1 1 @384]
+
+branch372:
+     # Jumps from {369}, jumps to {374}
+   372: OutputOp [-1]
+     # Jumps from {372}, jumps to {376}
+   374: OutputOp [0]
+     # Game score update
+     # Jumps from {374}, jumps to {378}
+   376: OutputOp [0]
+
+branch378:
+     # Jumps from {376, 378}, jumps to {378}
+   378: ExitOp []
+
+[0, 18, 22, 578, 37, 54, 65, 75, 84, 91, 161, 180, 213, 228, 261, 264, 279, 316, 319, 549, 338, 365, 231, 253, 282, 289, 393, 414, 481, 492, 503, 507, 518, 529, 540, 304, 94, 119, 138, 238, 108, 183, 205, 372, 378]

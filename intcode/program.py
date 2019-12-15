@@ -10,8 +10,9 @@ class EarlyEndOfInputError(ValueError):
     pass
 
 class Memory:
-    def __init__(self, program):
+    def __init__(self, program, process):
         self._memory = {}
+        self._process = process
         for i, value in enumerate(program):
             self._memory[i] = value
 
@@ -23,21 +24,30 @@ class Memory:
         if isinstance(idx, slice):
             return [self[index] for index in idx.indices(max(self._memory))]
         self._check_index(idx)
-        return self._memory.get(idx, 0)
+        value = self._memory.get(idx, 0)
+        for hook in self._process.hooks:
+            hook.on_memory_read(idx, value)
+        return value
 
     def __setitem__(self, idx, value):
         if isinstance(idx, slice):
             raise NotImplementedError
         self._check_index(idx)
+        for hook in self._process.hooks:
+            hook.on_memory_write(idx, value)
         self._memory[idx] = value
 
 class Process:
-    def __init__(self, program):
+    def __init__(self, program, hooks=[]):
         self.program = program
-        self.memory = Memory(self.program.program)
+        self.hooks = list(hooks)
+        self.memory = Memory(self.program.program, self)
         self.instruction_pointer = 0
         self.state = ProcessStateRunning()
         self.relative_base = 0
+
+    def add_hook(self, hook):
+        self.hooks.append(hook)
 
     @property
     def instruction(self):
@@ -50,7 +60,18 @@ class Process:
         return self.state.get_output(self)
 
     def step(self):
-        return self.state.step(self)
+        try:
+            for hook in self.hooks:
+                hook.before_step(self)
+            try:
+                self.state.step(self)
+            finally:
+                for hook in self.hooks:
+                    hook.after_step(self)
+        except ProgramExitted:
+            for hook in self.hooks:
+                hook.on_halt(self)
+            raise
 
     def waiting_for_input(self):
         return isinstance(self.state, ProcessStateWaitingForInput)
@@ -109,5 +130,5 @@ class IntCodeProgram:
     def __init__(self, program):
         self.program = program
 
-    def process(self):
-        return Process(self)
+    def process(self, *args, **kwargs):
+        return Process(self, *args, **kwargs)
