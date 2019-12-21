@@ -55,49 +55,42 @@ def recurse(indices, inputs, offset=0):
 def adapt(x):
     return np.abs(x) % 10
 
-class SmartSummer:
-    def __init__(self, inputs):
-        self.inputs = inputs
-        self.N = inputs.shape[0]
-        self.cache = {}
-
-    def _sum(self, offset, period):
-        if offset >= self.N:
-            return 0
-        if period >= self.N >> 3:
-            return self.inputs[offset::period].sum()
-        else:
-            #current = self.inputs[offset]
-            #current += self.sum(offset + period, 2 * period)
-            current = self.sum(offset, 2 * period)
-            current += self.sum(offset + period, 2 * period)
-            return current
-
-    def sum(self, offset, period):
-        if (offset, period) in self.cache:
-            return self.cache[(offset, period)]
-        out = self._sum(offset, period)
-        self.cache[(offset, period)] = out
-        return out
-
 def smart_fft_phase(inputs):
-    s = SmartSummer(inputs)
     N = inputs.shape[0]
     out_signal = np.zeros(N, dtype=inputs.dtype)
+    cumsum = np.cumsum(inputs, axis=0)
+    #import pdb
+    #pdb.set_trace()
     for level in range(N):
-        print(level)
-        out = 0
-        period = (level + 1) * 4
-        for i in range(level+1):
-            out += s.sum(level + i, period) - s.sum(3 * level + 2 + i, period)
-        out_signal[level] = adapt(out)
+        offset = -1
+        run_length = (level + 1)
+        period = run_length * 4
+        state = 0
+        my_sum = 0
+        for i in range(-1, N, run_length):
+            if state == 0 or state == 2:
+                state += 1
+            else:
+                current = cumsum[i - 1] if i > 0 else 0
+                current_sum = cumsum[min(N - 1, i + run_length - 1)] - current
+                if state == 1:
+                    my_sum += current_sum
+                elif state == 3:
+                    my_sum -= current_sum
+                else:
+                    raise NotImplementedError
+                state = (state + 1) % 4
+        my_sum = abs(my_sum) % 10
+        out_signal[level] = my_sum
     return out_signal
 
 def smart_fft(inputs, phases):
     signal = np.array(inputs)
+    # print(signal)
     for i in range(phases):
         print(i)
         signal = smart_fft_phase(signal)
+        # print(signal)
     return signal
 
 def run_part2(input_string):
