@@ -58,13 +58,19 @@ def adapt(x):
 def smart_fft_phase(inputs):
     N = inputs.shape[0]
     out_signal = np.zeros(N, dtype=inputs.dtype)
-    cumsum = np.cumsum(inputs, axis=0)
+    cumsum = np.concatenate([np.array([0]), np.cumsum(inputs, axis=0)], axis=0)
     #import pdb
     #pdb.set_trace()
     for level in range(N):
         offset = -1
         run_length = (level + 1)
         period = run_length * 4
+        my_sum = (
+            cumsum[(2 * run_length - 1):N:period].sum()
+            - cumsum[(run_length - 1):N:period].sum()
+            - cumsum[(4 * run_length - 1):N:period].sum()
+            + cumsum[(3 * run_length - 1):N:period].sum(0))
+
         state = 0
         my_sum = 0
         for i in range(-1, N, run_length):
