@@ -30,13 +30,15 @@ with open("program.txt", "r") as f:
         vaccuum_program.extend(line)
         i += 1
 
-print(vaccuum_program)
-
 process = program.process()
 last_out = None
 buf = []
 for out in process.run(inputs=vaccuum_program + [ord("y" if video else "n"), ord("\n")]):
-    out = chr(out)
+    try:
+        out = chr(out)
+    except ValueError:
+        print("Final output: %d" % out)
+        break
     if last_out == out == "\n":
         print(chr(27) + "[2J")
         print("".join(buf), end="", flush=True)
