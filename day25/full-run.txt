@@ -1,0 +1,32 @@
+east
+east
+west
+north
+north
+north
+south
+south
+south
+west
+north
+take sand
+north
+north
+take astrolabe
+south
+south
+west
+west
+east
+east
+south
+west
+north
+take shell
+south
+south
+west
+take ornament
+west
+south
+south
